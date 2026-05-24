@@ -1,0 +1,42 @@
+relationships:
+  - name: employees_to_departments
+    models:
+      - employees
+      - departments
+    join_type: many_to_one
+    condition: employees.department_id = departments.department_id
+
+  - name: employees_to_managers
+    models:
+      - employees
+      - employees
+    join_type: many_to_one
+    condition: employees.manager_id = employees.employee_id
+
+  - name: employee_projects_to_employees
+    models:
+      - employee_projects
+      - employees
+    join_type: many_to_one
+    condition: employee_projects.employee_id = employees.employee_id
+
+  - name: employee_projects_to_projects
+    models:
+      - employee_projects
+      - projects
+    join_type: many_to_one
+    condition: employee_projects.project_id = projects.project_id
+
+  - name: performance_reviews_to_employees
+    models:
+      - performance_reviews
+      - employees
+    join_type: many_to_one
+    condition: performance_reviews.employee_id = employees.employee_id
+
+  - name: salaries_to_employees
+    models:
+      - salaries
+      - employees
+    join_type: many_to_one
+    condition: salaries.employee_id = employees.employee_id

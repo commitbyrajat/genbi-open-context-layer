@@ -1,0 +1,30 @@
+name: performance_reviews
+properties:
+  description: Employee performance review outcomes including score, potential, promotion recommendation, and attrition risk.
+table_reference:
+  catalog: employee_demo
+  schema: public
+  table: performance_reviews
+columns:
+  - name: review_id
+    type: integer
+    primary_key: true
+    description: Unique review identifier.
+  - name: employee_id
+    type: integer
+    description: Reviewed employee.
+  - name: review_period
+    type: varchar
+    description: Review period such as 2024-H1.
+  - name: performance_score
+    type: float
+    description: Performance score out of 5.
+  - name: potential_rating
+    type: varchar
+    description: Potential rating such as low, medium, high.
+  - name: promotion_recommended
+    type: boolean
+    description: Whether promotion was recommended.
+  - name: attrition_risk
+    type: varchar
+    description: Attrition risk assessment.

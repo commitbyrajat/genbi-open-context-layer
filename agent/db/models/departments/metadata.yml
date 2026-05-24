@@ -1,0 +1,21 @@
+name: departments
+properties:
+  description: Company departments, business units, and office locations.
+table_reference:
+  catalog: employee_demo
+  schema: public
+  table: departments
+columns:
+  - name: department_id
+    type: integer
+    primary_key: true
+    description: Unique department identifier.
+  - name: department_name
+    type: varchar
+    description: Department name.
+  - name: business_unit
+    type: varchar
+    description: Larger business unit.
+  - name: location
+    type: varchar
+    description: Primary department location.

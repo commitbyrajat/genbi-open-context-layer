@@ -1,0 +1,24 @@
+name: salaries
+properties:
+  description: Employee salary history with effective date, annual salary, and currency.
+table_reference:
+  catalog: employee_demo
+  schema: public
+  table: salaries
+columns:
+  - name: salary_id
+    type: integer
+    primary_key: true
+    description: Unique salary record identifier.
+  - name: employee_id
+    type: integer
+    description: Employee receiving salary.
+  - name: effective_from
+    type: date
+    description: Salary effective date.
+  - name: annual_salary
+    type: float
+    description: Annual salary amount.
+  - name: currency
+    type: varchar
+    description: Salary currency.

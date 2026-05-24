@@ -1,0 +1,66 @@
+x-lancedb-minio-env: &lancedb-minio-env
+  WREN_MEMORY_PATH: s3://wren-lancedb/memory
+  AWS_ACCESS_KEY_ID: minioadmin
+  AWS_SECRET_ACCESS_KEY: minioadmin
+  AWS_REGION: us-east-1
+  AWS_DEFAULT_REGION: us-east-1
+  AWS_ENDPOINT: http://minio:9000
+  AWS_ENDPOINT_URL: http://minio:9000
+  ALLOW_HTTP: "true"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: wren-employee-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: employee_demo
+      POSTGRES_USER: wren
+      POSTGRES_PASSWORD: wren123
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - employee_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wren -d employee_demo"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    container_name: wren-lancedb-minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - lancedb_minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  lancedb-bucket:
+    image: minio/mc:latest
+    container_name: wren-lancedb-bucket
+    depends_on:
+      minio:
+        condition: service_started
+    entrypoint: >
+      /bin/sh -c "
+      until mc alias set local http://minio:9000 minioadmin minioadmin; do
+        sleep 2;
+      done;
+      mc mb --ignore-existing local/wren-lancedb;
+      "
+    environment:
+      <<: *lancedb-minio-env
+
+volumes:
+  employee_pg_data:
+  lancedb_minio_data:

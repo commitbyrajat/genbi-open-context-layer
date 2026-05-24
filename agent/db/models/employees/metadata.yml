@@ -1,0 +1,33 @@
+name: employees
+properties:
+  description: Employee master data including department, manager, job level, hire date, and employment status.
+table_reference:
+  catalog: employee_demo
+  schema: public
+  table: employees
+columns:
+  - name: employee_id
+    type: integer
+    primary_key: true
+    description: Unique employee identifier.
+  - name: employee_name
+    type: varchar
+    description: Full name of the employee.
+  - name: email
+    type: varchar
+    description: Employee email.
+  - name: department_id
+    type: integer
+    description: Department where the employee belongs.
+  - name: manager_id
+    type: integer
+    description: Employee ID of the reporting manager.
+  - name: job_level
+    type: varchar
+    description: Internal job level such as L2, L3, L4, L5, L6.
+  - name: hire_date
+    type: date
+    description: Employee joining date.
+  - name: employment_status
+    type: varchar
+    description: Current employment status.

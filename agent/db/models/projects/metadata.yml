@@ -1,0 +1,30 @@
+name: projects
+properties:
+  description: Project portfolio with project type, dates, budget, and status.
+table_reference:
+  catalog: employee_demo
+  schema: public
+  table: projects
+columns:
+  - name: project_id
+    type: integer
+    primary_key: true
+    description: Unique project identifier.
+  - name: project_name
+    type: varchar
+    description: Project name.
+  - name: project_type
+    type: varchar
+    description: Type of project.
+  - name: start_date
+    type: date
+    description: Project start date.
+  - name: end_date
+    type: date
+    description: Project end date.
+  - name: budget
+    type: float
+    description: Approved project budget.
+  - name: project_status
+    type: varchar
+    description: Current project status.

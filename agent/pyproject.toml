@@ -1,0 +1,11 @@
+[project]
+name = "agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "psycopg[binary]>=3.3.4",
+    "wren-pydantic[all,memory]>=0.2.0",
+    "wrenai[main,memory,postgres]>=0.7.0",
+]

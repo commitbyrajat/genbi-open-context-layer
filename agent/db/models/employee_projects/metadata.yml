@@ -1,0 +1,27 @@
+name: employee_projects
+properties:
+  description: Many-to-many mapping between employees and projects, including allocation percentage and role.
+table_reference:
+  catalog: employee_demo
+  schema: public
+  table: employee_projects
+columns:
+  - name: employee_project_id
+    type: integer
+    primary_key: true
+    description: Unique employee-project assignment identifier.
+  - name: employee_id
+    type: integer
+    description: Employee assigned to the project.
+  - name: project_id
+    type: integer
+    description: Project assigned to the employee.
+  - name: allocation_percent
+    type: float
+    description: Employee allocation percentage on the project.
+  - name: role_on_project
+    type: varchar
+    description: Employee role on the project.
+  - name: billable
+    type: boolean
+    description: Whether the employee assignment is billable.

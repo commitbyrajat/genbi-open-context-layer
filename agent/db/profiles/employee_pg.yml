@@ -1,0 +1,7 @@
+datasource: postgres
+host: localhost
+port: "5432"
+database: employee_demo
+user: wren
+password: wren123
+sslmode: disable

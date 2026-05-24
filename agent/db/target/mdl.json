@@ -1,0 +1,334 @@
+{
+  "catalog": "wren",
+  "schema": "public",
+  "models": [
+    {
+      "name": "departments",
+      "properties": {
+        "description": "Company departments, business units, and office locations."
+      },
+      "tableReference": {
+        "catalog": "employee_demo",
+        "schema": "public",
+        "table": "departments"
+      },
+      "columns": [
+        {
+          "name": "department_id",
+          "type": "integer",
+          "primaryKey": true,
+          "description": "Unique department identifier."
+        },
+        {
+          "name": "department_name",
+          "type": "varchar",
+          "description": "Department name."
+        },
+        {
+          "name": "business_unit",
+          "type": "varchar",
+          "description": "Larger business unit."
+        },
+        {
+          "name": "location",
+          "type": "varchar",
+          "description": "Primary department location."
+        }
+      ]
+    },
+    {
+      "name": "employee_projects",
+      "properties": {
+        "description": "Many-to-many mapping between employees and projects, including allocation percentage and role."
+      },
+      "tableReference": {
+        "catalog": "employee_demo",
+        "schema": "public",
+        "table": "employee_projects"
+      },
+      "columns": [
+        {
+          "name": "employee_project_id",
+          "type": "integer",
+          "primaryKey": true,
+          "description": "Unique employee-project assignment identifier."
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "description": "Employee assigned to the project."
+        },
+        {
+          "name": "project_id",
+          "type": "integer",
+          "description": "Project assigned to the employee."
+        },
+        {
+          "name": "allocation_percent",
+          "type": "float",
+          "description": "Employee allocation percentage on the project."
+        },
+        {
+          "name": "role_on_project",
+          "type": "varchar",
+          "description": "Employee role on the project."
+        },
+        {
+          "name": "billable",
+          "type": "boolean",
+          "description": "Whether the employee assignment is billable."
+        }
+      ]
+    },
+    {
+      "name": "employees",
+      "properties": {
+        "description": "Employee master data including department, manager, job level, hire date, and employment status."
+      },
+      "tableReference": {
+        "catalog": "employee_demo",
+        "schema": "public",
+        "table": "employees"
+      },
+      "columns": [
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "primaryKey": true,
+          "description": "Unique employee identifier."
+        },
+        {
+          "name": "employee_name",
+          "type": "varchar",
+          "description": "Full name of the employee."
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "description": "Employee email."
+        },
+        {
+          "name": "department_id",
+          "type": "integer",
+          "description": "Department where the employee belongs."
+        },
+        {
+          "name": "manager_id",
+          "type": "integer",
+          "description": "Employee ID of the reporting manager."
+        },
+        {
+          "name": "job_level",
+          "type": "varchar",
+          "description": "Internal job level such as L2, L3, L4, L5, L6."
+        },
+        {
+          "name": "hire_date",
+          "type": "date",
+          "description": "Employee joining date."
+        },
+        {
+          "name": "employment_status",
+          "type": "varchar",
+          "description": "Current employment status."
+        }
+      ]
+    },
+    {
+      "name": "performance_reviews",
+      "properties": {
+        "description": "Employee performance review outcomes including score, potential, promotion recommendation, and attrition risk."
+      },
+      "tableReference": {
+        "catalog": "employee_demo",
+        "schema": "public",
+        "table": "performance_reviews"
+      },
+      "columns": [
+        {
+          "name": "review_id",
+          "type": "integer",
+          "primaryKey": true,
+          "description": "Unique review identifier."
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "description": "Reviewed employee."
+        },
+        {
+          "name": "review_period",
+          "type": "varchar",
+          "description": "Review period such as 2024-H1."
+        },
+        {
+          "name": "performance_score",
+          "type": "float",
+          "description": "Performance score out of 5."
+        },
+        {
+          "name": "potential_rating",
+          "type": "varchar",
+          "description": "Potential rating such as low, medium, high."
+        },
+        {
+          "name": "promotion_recommended",
+          "type": "boolean",
+          "description": "Whether promotion was recommended."
+        },
+        {
+          "name": "attrition_risk",
+          "type": "varchar",
+          "description": "Attrition risk assessment."
+        }
+      ]
+    },
+    {
+      "name": "projects",
+      "properties": {
+        "description": "Project portfolio with project type, dates, budget, and status."
+      },
+      "tableReference": {
+        "catalog": "employee_demo",
+        "schema": "public",
+        "table": "projects"
+      },
+      "columns": [
+        {
+          "name": "project_id",
+          "type": "integer",
+          "primaryKey": true,
+          "description": "Unique project identifier."
+        },
+        {
+          "name": "project_name",
+          "type": "varchar",
+          "description": "Project name."
+        },
+        {
+          "name": "project_type",
+          "type": "varchar",
+          "description": "Type of project."
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "description": "Project start date."
+        },
+        {
+          "name": "end_date",
+          "type": "date",
+          "description": "Project end date."
+        },
+        {
+          "name": "budget",
+          "type": "float",
+          "description": "Approved project budget."
+        },
+        {
+          "name": "project_status",
+          "type": "varchar",
+          "description": "Current project status."
+        }
+      ]
+    },
+    {
+      "name": "salaries",
+      "properties": {
+        "description": "Employee salary history with effective date, annual salary, and currency."
+      },
+      "tableReference": {
+        "catalog": "employee_demo",
+        "schema": "public",
+        "table": "salaries"
+      },
+      "columns": [
+        {
+          "name": "salary_id",
+          "type": "integer",
+          "primaryKey": true,
+          "description": "Unique salary record identifier."
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "description": "Employee receiving salary."
+        },
+        {
+          "name": "effective_from",
+          "type": "date",
+          "description": "Salary effective date."
+        },
+        {
+          "name": "annual_salary",
+          "type": "float",
+          "description": "Annual salary amount."
+        },
+        {
+          "name": "currency",
+          "type": "varchar",
+          "description": "Salary currency."
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "employees_to_departments",
+      "models": [
+        "employees",
+        "departments"
+      ],
+      "joinType": "many_to_one",
+      "condition": "employees.department_id = departments.department_id"
+    },
+    {
+      "name": "employees_to_managers",
+      "models": [
+        "employees",
+        "employees"
+      ],
+      "joinType": "many_to_one",
+      "condition": "employees.manager_id = employees.employee_id"
+    },
+    {
+      "name": "employee_projects_to_employees",
+      "models": [
+        "employee_projects",
+        "employees"
+      ],
+      "joinType": "many_to_one",
+      "condition": "employee_projects.employee_id = employees.employee_id"
+    },
+    {
+      "name": "employee_projects_to_projects",
+      "models": [
+        "employee_projects",
+        "projects"
+      ],
+      "joinType": "many_to_one",
+      "condition": "employee_projects.project_id = projects.project_id"
+    },
+    {
+      "name": "performance_reviews_to_employees",
+      "models": [
+        "performance_reviews",
+        "employees"
+      ],
+      "joinType": "many_to_one",
+      "condition": "performance_reviews.employee_id = employees.employee_id"
+    },
+    {
+      "name": "salaries_to_employees",
+      "models": [
+        "salaries",
+        "employees"
+      ],
+      "joinType": "many_to_one",
+      "condition": "salaries.employee_id = employees.employee_id"
+    }
+  ],
+  "views": [],
+  "dataSource": "postgres",
+  "layoutVersion": 2
+}
